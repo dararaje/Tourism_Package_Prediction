@@ -1,3 +1,57 @@
-# Tourism_Package_Prediction
-Objective
-As an MLOps Engineer at "Visit with Us," your responsibility is to design and deploy an MLOps pipeline on GitHub to automate the end-to-end workflow for predicting customer purchases. The primary objective is to build a model that predicts whether a customer will purchase the newly introduced Wellness Tourism Package before contacting them. The pipeline will include data cleaning, preprocessing, transformation, model building, training, evaluation, and deployment, ensuring consistent performance and scalability. By leveraging GitHub Actions for CI/CD integration, the system will enable automated updates, streamline model deployment, and improve operational efficiency. This robust predictive solution will empower policymakers to make data-driven decisions, enhance marketing strategies, and effectively target potential customers, thereby driving customer acquisition and business growth.
+---
+title: Tourism Package Prediction
+emoji: ✈️
+colorFrom: blue
+colorTo: green
+sdk: gradio
+sdk_version: 4.0.0
+app_file: app.py
+pinned: false
+license: mit
+---
+
+# 🌍 Tourism Package Prediction
+
+## Overview
+This application predicts whether a customer will purchase the **Tourism Package** based on their demographic information, travel preferences, and sales interaction data.
+
+## Features
+- **Real-time Predictions**: Get instant predictions on customer purchase likelihood
+- **Probability Scores**: View confidence levels for each prediction
+- **Comprehensive Input**: Analyze multiple customer attributes including:
+  - Demographics (Age, Gender, Income, Occupation)
+  - Travel preferences (Number of trips, Preferred hotel rating)
+  - Sales interaction quality (Pitch satisfaction, Follow-ups)
+
+## Model Information
+The prediction model is trained using machine learning techniques to analyze historical customer data and identify patterns that indicate purchase likelihood.
+
+### Key Metrics
+- Customer demographics analysis
+- Travel behavior patterns
+- Sales pitch effectiveness
+- Follow-up engagement levels
+
+## Usage
+1. Enter customer details in the input fields
+2. Click "Predict Purchase Likelihood"
+3. View the prediction result with confidence scores
+
+## Technology Stack
+- **Framework**: Gradio 4.0
+- **ML Library**: scikit-learn
+- **Data Processing**: pandas
+- **Model Hosting**: HuggingFace Hub
+
+## Model Repository
+The trained model and preprocessor are hosted at:
+`dararaje/Tourism_Package_Prediction`
+
+## About
+This project is part of an MLOps pipeline demonstrating:
+- Automated model training and deployment
+- CI/CD integration with GitHub Actions
+- Model versioning and tracking with MLflow
+- Production deployment on HuggingFace Spaces
+
+---
