@@ -12,31 +12,29 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-      
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-          cache: 'pip' # Speeds up subsequent runs
 
       - name: Install Dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r tourism_project/deployment/requirements.txt
-          # Ensuring these are present even if forgotten in requirements.txt
-          pip install huggingface_hub mlflow xgboost scikit-learn
+        run: pip install -r tourism_project/deployment/requirements.txt
 
-      - name: Run Data Preparation
+      - name: Train Model
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: python tourism_project/model_building/prep.py
-
-      - name: Model Training & MLflow Logging
-        env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
-          # Note: Since this is a temporary GitHub runner, 
-          # local MLflow logs will vanish unless you use a remote tracking URI.
         run: python tourism_project/model_building/train.py
+
+      # ✨ NEW: Save model files as artifacts
+      - name: Upload Model Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: trained-models
+          path: |
+            tourism_project/model_building/tourism_model.pkl
+            tourism_project/model_building/tourism_preprocessor.pkl
+          retention-days: 1
 
   deploy-hosting:
     runs-on: ubuntu-latest
@@ -44,6 +42,13 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+
+      # ✨ NEW: Download the trained models
+      - name: Download Model Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: trained-models
+          path: tourism_project/model_building/
 
       - name: Set up Python
         uses: actions/setup-python@v4
